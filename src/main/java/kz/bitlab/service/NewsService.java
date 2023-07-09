@@ -14,6 +14,15 @@ public class NewsService {
     private final NewsRepository newsRepository;
 
     public List<News> getNews() {
-        return newsRepository.fin
+        return newsRepository.findAll();
     }
+
+    public News addNews(News news) {
+        return newsRepository.save(news);
+    }
+
+    public News getNews(Long id) {
+        return newsRepository.findById(id).orElse(new News());
+    }
+
 }
