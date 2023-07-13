@@ -1,5 +1,6 @@
 package kz.bitlab.api;
 
+import kz.bitlab.dto.NewsDTO;
 import kz.bitlab.model.News;
 import kz.bitlab.service.NewsService;
 import lombok.RequiredArgsConstructor;
@@ -15,18 +16,28 @@ public class NewsRestController {
     private final NewsService newsService;
 
     @GetMapping
-    public List<News> newsList() {
+    public List<NewsDTO> newsList() {
         return newsService.getNews();
     }
 
     @GetMapping(value = "{id}")
-    public News getNews(@PathVariable(name = "id") Long id) {
+    public NewsDTO getNews(@PathVariable(name = "id") Long id) {
         return newsService.getNews(id);
     }
 
     @PostMapping
-    public News addNews(@RequestBody News news) {
+    public NewsDTO addNews(@RequestBody NewsDTO news) {
         return newsService.addNews(news);
+    }
+
+    @PutMapping
+    public NewsDTO updateNews(@RequestBody NewsDTO news) {
+        return newsService.updateNews(news);
+    }
+
+    @DeleteMapping(value = "{id}")
+    public void deleteNews(@PathVariable(name = "id") Long id) {
+        newsService.deleteNews(id);
     }
 
 }

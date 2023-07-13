@@ -1,5 +1,6 @@
 package kz.bitlab.api;
 
+import kz.bitlab.dto.NewsDTO;
 import kz.bitlab.model.News;
 import kz.bitlab.service.NewsService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +16,12 @@ public class NewsController {           // не самый лучший вари
     private final NewsService newsService;
 
     @GetMapping(value = "/get-news-list")
-    public List<News> getNews() {
+    public List<NewsDTO> getNews() {
         return newsService.getNews();
     }
 
     @PostMapping(value = "/add-news")
-    public News addNews(@RequestBody News news) {
+    public NewsDTO addNews(@RequestBody NewsDTO news) {
         return newsService.addNews(news);
     }
 

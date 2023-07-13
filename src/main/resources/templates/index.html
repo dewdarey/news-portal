@@ -3,6 +3,53 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout.html">
     <div layout:fragment="content">
-        <h1 class="text-center">HELLO TO SPRING SECURITY</h1>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>DESCRIPTION</th>
+                        <th>DETAILS</th>
+                    </tr>
+                    </thead>
+                    <tbody id="newsListBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            loadNews();
+
+            function loadNews() {
+                const httpRequest = new XMLHttpRequest();
+                httpRequest.open("GET", "/news", true);
+                httpRequest.onreadystatechange = function () {
+                    if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+
+                        let newsList = JSON.parse(httpRequest.responseText);
+
+                        let tableContent = "";
+                        for (let i = 0; i < newsList.length; i++) {
+                            tableContent+="<tr>";
+                            tableContent+="<td>"+newsList[i].id+"</td>";
+                            tableContent+="<td>"+newsList[i].title+"</td>";
+                            tableContent+="<td>"+newsList[i].description+"</td>";
+                            tableContent+="<td><button class='btn btn-primary btn-sm'>DETAILS</button></td>";
+                            tableContent+="</tr>";
+                            tableContent+="<tr>";
+                            console.log(newsList[i].title + " - " + newsList[i].description);
+                        }
+                        document.getElementById("newsListBody").innerHTML = tableContent;
+                    }
+                }
+                httpRequest.send();
+            }
+
+        </script>
+
     </div>
 </html>
