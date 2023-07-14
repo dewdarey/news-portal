@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "t_news")
 @Getter
@@ -15,5 +17,14 @@ public class News extends BaseModel {       // наследуется от кл�
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
+    @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    @PrePersist
+    private void prePersist() {
+        date = new Date();
+    }
 
 }

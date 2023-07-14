@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .logoutUrl("/sign-out")             // post request to /sign-out
                 .logoutSuccessUrl("/sign-in-page");
 
-        http.csrf().disable();                      // чтобы csrf token не генерировал (для безопасности)
+        http.csrf().disable();                      // чтобы csrf token не генерировал (проверку не делал) (cross site request forgery)
 
         return http.build();
     }

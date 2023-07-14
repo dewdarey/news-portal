@@ -1,11 +1,11 @@
 package kz.bitlab.api;
 
 import kz.bitlab.dto.NewsDTO;
-import kz.bitlab.model.News;
 import kz.bitlab.service.NewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,6 +27,7 @@ public class NewsRestController {
 
     @PostMapping
     public NewsDTO addNews(@RequestBody NewsDTO news) {
+        news.setDate(new Date());
         return newsService.addNews(news);
     }
 
